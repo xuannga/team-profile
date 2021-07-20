@@ -58,8 +58,28 @@ function init() {
     function addTeam() {
         //prompt for team members
         inquirer.prompt([{
-
-        }]);
+            type: "list",
+            name: "teamChoice",
+            message: "What would you like to add next?",
+            choices: ["Engineer", "Inter"]
+        }]).then(userChoice => {
+            switch (userChoice.teamChoice) {
+                case "Engineer":
+                    addEngineer();
+                    break;
+                case "Intern":
+                    addIntern();
+                    break;
+                default:
+                    generateHtml();
+            }
+        });
     };
 
+    //add engineer when selected
+    function addEngineer() {
+        inquirer.prompt([{
+            type:
+        }])
+    }
 }
