@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/xuannga/team-profile/issues"
   },
-  "homepage": "https://github.com/xuannga/team-profile#readme"
+  "homepage": "https://github.com/xuannga/team-profile#readme",
+  "dependencies": {
+    "inquirer": "^8.1.2"
+  }
 }
