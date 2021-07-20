@@ -14,8 +14,6 @@ const DIST_DIR = path.resolve(__dirname, 'dist')
 const outputPath = path.join(DIST_DIR, 'index.html');
 
 const render = require('template.js');
-const { ADDRGETNETWORKPARAMS } = require('dns');
-const { setFlagsFromString } = require('v8');
 
 // empty arrays for team and id as place holders
 const teamArr = [];
