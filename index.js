@@ -15,6 +15,7 @@ const outputPath = path.join(DIST_DIR, 'index.html');
 
 const render = require('template.js');
 const { ADDRGETNETWORKPARAMS } = require('dns');
+const { setFlagsFromString } = require('v8');
 
 // empty arrays for team and id as place holders
 const teamArr = [];
@@ -61,7 +62,7 @@ function init() {
             type: "list",
             name: "teamChoice",
             message: "What would you like to add next?",
-            choices: ["Engineer", "Inter"]
+            choices: ["Engineer", "Intern"]
         }]).then(userChoice => {
             switch (userChoice.teamChoice) {
                 case "Engineer":
@@ -78,8 +79,74 @@ function init() {
 
     //add engineer when selected
     function addEngineer() {
-        inquirer.prompt([{
-            type:
-        }])
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "engineerName",
+                message: "What's the engineer's name?", 
+            },
+            {
+                type: "input",
+                name: "engineerId",
+                message: "What's the engineer's ID?",
+            },
+            {
+                type: "input",
+                name: "engineerEmail",
+                message: "What's the engineer's email"
+            },
+            {
+                type: "input",
+                name: "engineerGithub",
+                message: "What's the engineer's GitHub id?"
+            }
+        ]).then(answer => {
+            const engineer = new Engineer(answer.engineerName, answer.engineerId, answer.engineerEmail, answer.engineerGithub)
+            teamArr.push(engineer);
+            idArr.push(answers.engineerId);
+            addTeam();
+        });
     }
+
+    //addIntern
+    function addIntern(){
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "internName",
+                message: "What's the intern's name?"
+            },
+            {
+                type: "input",
+                name: "internId",
+                message: "What's the intern ID"
+            },
+            {
+                type: "input",
+                name: "internEmail",
+                message: "What is the intern's email?"
+            },
+            {
+                type: "input",
+                name: "internSchool",
+                message: "What's the intern's school?"
+            }
+        ]).then(answer => {
+            const intern = new Intern(answer.internName, answer.internId, answer.internEmail, answer.internSchool)
+            teamArr.push(intern);
+            idArr.push(answer.internId);
+            addTeam();
+        });
+    }
+
+    function generateHtml() {
+        if (!fs.existsSync(DIST_DIR)) {
+            fs.mkdirSync(DIST_DIR)
+        }
+        console.log("Generating...Please wait...");
+        fs.writeFileSync(outputPath, render(teamArr), "utf-8");
+    }
+    addManager();
 }
+
+init();
