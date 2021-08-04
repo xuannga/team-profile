@@ -13,7 +13,7 @@ const Intern = require('./lib/Intern');
 const DIST_DIR = path.resolve(__dirname, 'dist')
 const outputPath = path.join(DIST_DIR, 'index.html');
 
-const render = require('template.js');
+const render = require('./template.js');
 
 // empty arrays for team and id as place holders
 const teamArr = [];
@@ -60,7 +60,7 @@ function init() {
             type: "list",
             name: "teamChoice",
             message: "What would you like to add next?",
-            choices: ["Engineer", "Intern"]
+            choices: ["Engineer", "Intern", "Quit"]
         }]).then(userChoice => {
             switch (userChoice.teamChoice) {
                 case "Engineer":
@@ -77,11 +77,10 @@ function init() {
 
     //add engineer when selected
     function addEngineer() {
-        inquirer.prompt([
-            {
+        inquirer.prompt([{
                 type: "input",
                 name: "engineerName",
-                message: "What's the engineer's name?", 
+                message: "What's the engineer's name?",
             },
             {
                 type: "input",
@@ -101,15 +100,14 @@ function init() {
         ]).then(answer => {
             const engineer = new Engineer(answer.engineerName, answer.engineerId, answer.engineerEmail, answer.engineerGithub)
             teamArr.push(engineer);
-            idArr.push(answers.engineerId);
+            idArr.push(answer.engineerId);
             addTeam();
         });
     }
 
     //addIntern
-    function addIntern(){
-        inquirer.prompt([
-            {
+    function addIntern() {
+        inquirer.prompt([{
                 type: "input",
                 name: "internName",
                 message: "What's the intern's name?"

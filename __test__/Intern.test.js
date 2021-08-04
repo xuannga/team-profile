@@ -1,8 +1,8 @@
-const Employee = require('./lib/Employee');
-const Intern = require('./lib/Intern');
+const Employee = require('../lib/Employee');
+const Intern = require('../lib/Intern');
 
 test('creates an intern object', () => {
-    const intern = new Inter('mickey');
+    const intern = new Intern('mickey');
 });
 
 test('set school with constructor', () => {
